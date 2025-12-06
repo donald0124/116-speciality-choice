@@ -6,7 +6,7 @@ import { SortableItem } from './SortableItem'; // 確保這裡正確引入
 import './App.css';
 
 // 您的新 GAS 網址
-const API_URL = "https://script.google.com/macros/s/AKfycbxBjLA19fyDl_G8VD29ELD6HG-0l8aXy9LUnTyvWm5cvn4lcks89f1IkJXWVUoNzZ53Sw/exec";
+const API_URL = import.meta.env.VITE_GAS_API_URL;
 
 const calculateAllocations = (users, config) => {
   const capacity = {};
