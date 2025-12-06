@@ -160,36 +160,47 @@ html, body {
 .btn-primary:hover { background: var(--primary-dark); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
 
-/* --- Modal (Sheet Style) --- */
+/* 🟢 修改後：強制置中 */
 .modal-overlay {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100;
   background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px);
-  display: flex; align-items: flex-end; justify-content: center;
+  /* 改成 center 讓它置中 */
+  display: flex; align-items: center; justify-content: center;
+  /* 增加內距，確保不會貼齊螢幕邊緣 */
+  padding: 20px; 
   animation: fadeIn 0.2s ease-out;
+  
 }
 
+/* 🟢 修改後：全圓角 + 高度安全限制 */
 .modal-content {
   background: #f8fafc; width: 100%; max-width: 500px;
-  max-height: 85dvh;
-  border-radius: 20px 20px 0 0; 
+  /* 高度稍微改小一點，確保上下都有留白 */
+  max-height: 80vh; 
+  /* 改成四個角都是圓角 */
+  border-radius: 20px; 
   display: flex; flex-direction: column; 
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* 陰影調整通用一點 */
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-bottom: env(safe-area-inset-bottom);
+  /* 移除 safe-area，因為已經置中且有 padding 了 */
+  /* padding-bottom: env(safe-area-inset-bottom); */ 
 }
 
 @media(min-width: 600px) {
-  .modal-overlay { align-items: center; }
+  .-overlay { align-items: center; }
   .modal-content { border-radius: 20px; height: auto; max-height: 80vh; }
 }
 
+/* 🟢 修改後：保持一致 */
 .modal-header { 
   padding: 16px 20px; background: white; border-bottom: 1px solid var(--border-color); 
   display: flex; justify-content: space-between; align-items: center; 
   font-weight: 900; font-size: 1.1rem; 
   position: sticky; top: 0; z-index: 10;
+  /* 維持上方圓角即可 */
   border-radius: 20px 20px 0 0;
 }
+
 .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
 
 /* --- Drag & Drop List --- */
@@ -199,13 +210,16 @@ html, body {
   background: white; padding: 12px 10px; border-radius: 12px; 
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  touch-action: none; user-select: none;
+  touch-action: pan-y; user-select: none;
 }
 .pref-item.dragging {
   background: #e0f2fe; border-color: var(--primary-color);
   box-shadow: var(--shadow-lg); z-index: 999; opacity: 0.9;
 }
-.drag-handle { padding: 8px; color: #94a3b8; display: flex; align-items: center; }
+.drag-handle { padding: 8px; color: #94a3b8; display: flex; align-items: center; 
+  /* ⭐️ 新增這裡：只有按住把手時，才禁止瀏覽器的滾動行為，專注於拖曳 */
+  touch-action: none; 
+  cursor: grab;}
 .pref-index { 
   background: var(--text-main); color: white; width: 28px; height: 28px; 
   border-radius: 50%; font-size: 0.9rem; margin-right: 12px; 
