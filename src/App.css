@@ -212,6 +212,16 @@ html, body {
   box-shadow: var(--shadow-sm);
   touch-action: pan-y; user-select: none;
 }
+
+/* ⭐️ 新增這個類別：讓內容物 (把手、序號、名稱) 水平排列，不要換行 */
+.pref-content {
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  flex: 1;             /* 佔據剩餘空間，把垃圾桶推到最右邊 */
+  gap: 8px;           /* 元素之間的間距 */
+  overflow: hidden;    /* 避免內容過長爆版 */
+}
+
 .pref-item.dragging {
   background: #e0f2fe; border-color: var(--primary-color);
   box-shadow: var(--shadow-lg); z-index: 999; opacity: 0.9;
@@ -220,6 +230,7 @@ html, body {
   /* ⭐️ 新增這裡：只有按住把手時，才禁止瀏覽器的滾動行為，專注於拖曳 */
   touch-action: none; 
   cursor: grab;}
+
 .pref-index { 
   background: var(--text-main); color: white; width: 28px; height: 28px; 
   border-radius: 50%; font-size: 0.9rem; margin-right: 12px; 
@@ -228,10 +239,12 @@ html, body {
 }
 /* 修正垃圾桶按鈕 */
 .remove-btn { 
-  color: #ef4444; background: #fee2e2; border: none; width: 36px; height: 36px;
+  background: #fee2e2; border: none; width: 36px; height: 36px;
   border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;
   flex-shrink: 0; /* 防止被擠壓消失 */
 }
+
+
 
 /* --- Options Grid --- */
 .options-grid { 

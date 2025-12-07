@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, Trash2 } from 'lucide-react';
+import { GripVertical} from 'lucide-react';
 
 export function SortableItem(props) {
   const {
@@ -43,7 +43,11 @@ export function SortableItem(props) {
         onPointerDown={e => e.stopPropagation()} 
         onClick={props.onRemove}
       >
-        <Trash2 size={18} />
+         <img 
+          src="/trash-2.svg" 
+          alt="刪除" 
+          className="trash-icon"
+        />
       </button>
     </div>
   );
